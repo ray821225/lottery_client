@@ -152,10 +152,6 @@ function LottoPage() {
 
   const [winStats, setWinStats] = useState({});
 
-  console.log(lottoData, "lottoData");
-
-  console.log(winStats, "winStats");
-
   useEffect(() => {
     async function fetchLotto() {
       const data = await getLottoResults();
@@ -334,14 +330,18 @@ function LottoPage() {
     if (value !== null) {
       const numValue = parseInt(value) || 0;
       const clampedValue = Math.max(0, Math.min(100, numValue));
-      setWeights(Object.fromEntries(ALL_NUMBERS.map((num) => [num, clampedValue])));
+      setWeights(
+        Object.fromEntries(ALL_NUMBERS.map((num) => [num, clampedValue]))
+      );
     }
   };
 
   // 重置為預設值（全部清零並清除 localStorage）
   const handleResetWeights = () => {
     if (window.confirm("確定要重置所有權重設定嗎？")) {
-      const defaultWeights = Object.fromEntries(ALL_NUMBERS.map((num) => [num, 0]));
+      const defaultWeights = Object.fromEntries(
+        ALL_NUMBERS.map((num) => [num, 0])
+      );
       setWeights(defaultWeights);
       localStorage.removeItem("lotto_weights");
     }
@@ -432,28 +432,40 @@ function LottoPage() {
               </div>
 
               {/* 生成模式切換 */}
-              <div style={{
-                marginTop: "15px",
-                padding: "10px",
-                backgroundColor: "#f5f5f5",
-                borderRadius: "8px",
-                border: "1px solid #ddd"
-              }}>
-                <div style={{ marginBottom: "8px", fontWeight: "bold", fontSize: "14px" }}>
+              <div
+                style={{
+                  marginTop: "15px",
+                  padding: "10px",
+                  backgroundColor: "#f5f5f5",
+                  borderRadius: "8px",
+                  border: "1px solid #ddd",
+                }}
+              >
+                <div
+                  style={{
+                    marginBottom: "8px",
+                    fontWeight: "bold",
+                    fontSize: "14px",
+                  }}
+                >
                   📊 生成模式：
                 </div>
-                <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                  <label style={{
-                    display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
-                    padding: "8px 12px",
-                    backgroundColor: !useWeights ? "#4caf50" : "#fff",
-                    color: !useWeights ? "#fff" : "#333",
-                    borderRadius: "6px",
-                    border: "2px solid " + (!useWeights ? "#4caf50" : "#ddd"),
-                    transition: "all 0.3s"
-                  }}>
+                <div
+                  style={{ display: "flex", gap: "10px", alignItems: "center" }}
+                >
+                  <label
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      cursor: "pointer",
+                      padding: "8px 12px",
+                      backgroundColor: !useWeights ? "#4caf50" : "#fff",
+                      color: !useWeights ? "#fff" : "#333",
+                      borderRadius: "6px",
+                      border: "2px solid " + (!useWeights ? "#4caf50" : "#ddd"),
+                      transition: "all 0.3s",
+                    }}
+                  >
                     <input
                       type="radio"
                       name="generateMode"
@@ -463,17 +475,19 @@ function LottoPage() {
                     />
                     🎲 隨機模式
                   </label>
-                  <label style={{
-                    display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
-                    padding: "8px 12px",
-                    backgroundColor: useWeights ? "#2196f3" : "#fff",
-                    color: useWeights ? "#fff" : "#333",
-                    borderRadius: "6px",
-                    border: "2px solid " + (useWeights ? "#2196f3" : "#ddd"),
-                    transition: "all 0.3s"
-                  }}>
+                  <label
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      cursor: "pointer",
+                      padding: "8px 12px",
+                      backgroundColor: useWeights ? "#2196f3" : "#fff",
+                      color: useWeights ? "#fff" : "#333",
+                      borderRadius: "6px",
+                      border: "2px solid " + (useWeights ? "#2196f3" : "#ddd"),
+                      transition: "all 0.3s",
+                    }}
+                  >
                     <input
                       type="radio"
                       name="generateMode"
@@ -484,12 +498,14 @@ function LottoPage() {
                     ⚖️ 權重模式
                   </label>
                 </div>
-                <div style={{
-                  marginTop: "8px",
-                  fontSize: "12px",
-                  color: "#666",
-                  fontStyle: "italic"
-                }}>
+                <div
+                  style={{
+                    marginTop: "8px",
+                    fontSize: "12px",
+                    color: "#666",
+                    fontStyle: "italic",
+                  }}
+                >
                   {useWeights
                     ? "✓ 依照權重設定生成號碼（高權重號碼出現機率較高）"
                     : "✓ 完全隨機生成號碼（所有號碼機率相等）"}
@@ -558,7 +574,14 @@ function LottoPage() {
           </p>
 
           {/* 快捷操作按鈕 */}
-          <div style={{ marginBottom: "15px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <div
+            style={{
+              marginBottom: "15px",
+              display: "flex",
+              gap: "10px",
+              flexWrap: "wrap",
+            }}
+          >
             <MuiButton
               variant="outlined"
               size="small"
@@ -604,7 +627,8 @@ function LottoPage() {
                   padding: "8px",
                   backgroundColor: "#f5f5f5",
                   borderRadius: "8px",
-                  border: weights[num] > 0 ? "2px solid #2196f3" : "1px solid #ddd",
+                  border:
+                    weights[num] > 0 ? "2px solid #2196f3" : "1px solid #ddd",
                 }}
               >
                 <div
@@ -637,9 +661,7 @@ function LottoPage() {
           </div>
         </DialogContent>
         <DialogActions>
-          <MuiButton onClick={() => setWeightDialogOpen(false)}>
-            取消
-          </MuiButton>
+          <MuiButton onClick={() => setWeightDialogOpen(false)}>取消</MuiButton>
           <MuiButton
             onClick={() => {
               setWeightDialogOpen(false);
